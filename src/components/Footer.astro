@@ -1,0 +1,79 @@
+---
+import { site, url } from "../data/site";
+import Logo from "./Logo.astro";
+import Wordmark from "./Wordmark.astro";
+import DawnStrip from "./DawnStrip.astro";
+const year = new Date().getFullYear();
+---
+
+<DawnStrip />
+<footer class="bg-[#1C2951] text-white/80">
+  <div class="max-w-[1180px] mx-auto px-6 lg:px-10 py-20 md:py-24">
+    <div class="grid md:grid-cols-3 gap-12 md:gap-16">
+      <div class="md:col-span-1">
+        <div class="flex items-center gap-3 text-white">
+          <Logo class="w-[26px] h-[26px]" />
+          <Wordmark class="h-[10px] w-auto" />
+        </div>
+        <p class="mt-5 text-sm leading-relaxed text-white/70 max-w-xs">
+          Specialized alternative credit and special situations in Colombia and
+          select emerging markets.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="eyebrow eyebrow-light mb-5">Site</h4>
+        <ul class="space-y-2.5 text-sm">
+          {
+            site.nav.map((item) => (
+              <li>
+                <a href={item.href} class="hover:text-white transition-colors">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="eyebrow eyebrow-light mb-5">Investor inquiries</h4>
+        <p class="text-sm text-white">{site.contact.name}</p>
+        <p class="text-sm text-white/65 mb-4">{site.contact.title}</p>
+        <p class="text-sm">
+          <a
+            href={`mailto:${site.contact.email}`}
+            class="hover:text-white transition-colors">{site.contact.email}</a
+          >
+        </p>
+        <p class="text-sm">
+          <a
+            href={`tel:${site.contact.phone.replace(/[^+\d]/g, "")}`}
+            class="hover:text-white transition-colors">{site.contact.phone}</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <hr class="hairline-light my-12" />
+
+    <div class="text-xs text-white/55 leading-relaxed space-y-3 max-w-4xl">
+      <p>
+        This website is for informational purposes only and does not constitute
+        an offer to sell, or a solicitation of an offer to buy, any security or
+        interest in any investment vehicle. Any offering will be made only
+        through definitive offering documents and only to qualified investors in
+        jurisdictions where permitted by law.
+      </p>
+      <p>
+        Investments involve risk, including the possible loss of capital. Past
+        performance is not indicative of future results. Any performance
+        information is based on company records, may be unaudited, and may
+        include results from affiliated vehicles or prior transactions.
+      </p>
+      <p class="pt-3 text-white/45">
+        © {year} Mishpat Capital Management. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

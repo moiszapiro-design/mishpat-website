@@ -1,0 +1,31 @@
+---
+/**
+ * Mishpat mark — six columns on a 140×140 grid (stroke 10, pitch 26),
+ * traced from MISHPAT_LOGO_NO_TAGLINE_CENTRED.pdf. Single colour, inherits
+ * `currentColor` so it works navy-on-white and white-on-navy.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = "w-7 h-7" } = Astro.props;
+---
+
+<svg viewBox="0 0 140 140" class={className} fill="currentColor" aria-hidden="true">
+  <!-- outer columns, full height -->
+  <rect x="0" y="0" width="10" height="140"></rect>
+  <rect x="130" y="0" width="10" height="140"></rect>
+  <!-- inner columns, full height -->
+  <rect x="52" y="0" width="10" height="140"></rect>
+  <rect x="78" y="0" width="10" height="140"></rect>
+  <!-- middle columns, dropped -->
+  <rect x="26" y="26" width="10" height="114"></rect>
+  <rect x="104" y="26" width="10" height="114"></rect>
+  <!-- top rails -->
+  <rect x="0" y="0" width="62" height="10"></rect>
+  <rect x="78" y="0" width="62" height="10"></rect>
+  <!-- middle rail -->
+  <rect x="26" y="26" width="88" height="10"></rect>
+  <!-- feet -->
+  <rect x="26" y="130" width="36" height="10"></rect>
+  <rect x="78" y="130" width="36" height="10"></rect>
+</svg>

@@ -1,0 +1,152 @@
+---
+import { site, url } from "../data/site";
+import Logo from "./Logo.astro";
+import Wordmark from "./Wordmark.astro";
+---
+
+<nav
+  data-nav
+  class="fixed top-0 inset-x-0 z-50 bg-[#E7E6E6] border-b border-[#1C2951]/10 transition-shadow duration-300"
+>
+  <div
+    class="max-w-[1180px] mx-auto px-6 lg:px-10 h-20 flex items-center justify-between"
+  >
+    <a
+      href={url("/")}
+      class="flex items-center gap-3"
+      aria-label="Mishpat Capital Management — home"
+    >
+      <Logo class="w-[26px] h-[26px] text-[#2F3F75]" />
+      <Wordmark class="h-[10px] w-auto text-[#373435]" />
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 text-[13px] text-[#3F4A6B]">
+      {
+        site.nav.map((item) => (
+          <li>
+            <a href={item.href} data-navlink class="transition-colors hover:text-[#1C2951]">
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <button
+      type="button"
+      data-mobile-toggle
+      aria-label="Open menu"
+      aria-expanded="false"
+      class="md:hidden text-[#1C2951] p-2 -mr-2"
+    >
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.4"
+        aria-hidden="true"
+      >
+        <line x1="3" y1="8" x2="21" y2="8"></line>
+        <line x1="3" y1="16" x2="21" y2="16"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div
+    data-mobile-menu
+    hidden
+    class="md:hidden bg-[#E7E6E6] border-t border-[#1C2951]/10"
+  >
+    <ul class="px-6 pb-8 pt-2 space-y-1">
+      {
+        site.nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              data-navlink
+              class="block py-2 text-lg font-display text-[#1C2951] hover:text-[#2F5496] transition-colors"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const nav = document.querySelector<HTMLElement>("[data-nav]");
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-navlink]"),
+  );
+  const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+  const toggle = document.querySelector<HTMLButtonElement>(
+    "[data-mobile-toggle]",
+  );
+
+  // Lift the bar off the page once it starts overlapping content.
+  const onScroll = () => {
+    nav?.classList.toggle(
+      "shadow-[0_1px_12px_rgba(28,41,81,0.10)]",
+      window.scrollY > 24,
+    );
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Close the mobile panel after tapping a section link.
+  const closeMenu = () => {
+    menu?.setAttribute("hidden", "");
+    toggle?.setAttribute("aria-expanded", "false");
+  };
+  toggle?.addEventListener("click", () => {
+    if (!menu) return;
+    if (menu.hasAttribute("hidden")) {
+      menu.removeAttribute("hidden");
+      toggle.setAttribute("aria-expanded", "true");
+    } else {
+      closeMenu();
+    }
+  });
+  links.forEach((a) => a.addEventListener("click", closeMenu));
+
+  // Scroll spy — mark the section currently in view.
+  const setActive = (id: string | null) => {
+    links.forEach((a) => {
+      const on = id !== null && a.getAttribute("href") === `#${id}`;
+      a.classList.toggle("text-[#1C2951]", on);
+      a.classList.toggle("font-medium", on);
+      if (on) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  };
+
+  const sections = Array.from(
+    document.querySelectorAll<HTMLElement>("main section[id]"),
+  );
+  if (sections.length) {
+    const visible = new Map<string, number>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) visible.set(e.target.id, e.intersectionRatio);
+          else visible.delete(e.target.id);
+        });
+        let best: string | null = null;
+        let bestRatio = 0;
+        visible.forEach((ratio, id) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            best = id;
+          }
+        });
+        setActive(best);
+      },
+      { rootMargin: "-80px 0px -55% 0px", threshold: [0.05, 0.25, 0.5, 0.75] },
+    );
+    sections.forEach((s) => observer.observe(s));
+  }
+</script>

@@ -1,0 +1,32 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  lede?: string;
+  wide?: boolean;
+}
+const { eyebrow, title, lede, wide = false } = Astro.props;
+---
+
+<section class="bg-white">
+  <div
+    class:list={[
+      "mx-auto px-6 lg:px-10 pt-24 md:pt-36 pb-14 md:pb-20",
+      wide ? "max-w-[1100px]" : "max-w-[860px]",
+    ]}
+  >
+    <p class="eyebrow dawn-in">{eyebrow}</p>
+    <h1
+      class="dawn-in dawn-in-delay-1 mt-7 font-display text-[2.5rem] sm:text-5xl md:text-[3.75rem] text-[#1C2951] leading-[1.04] max-w-[19ch]"
+    >
+      {title}
+    </h1>
+    {
+      lede && (
+        <p class="dawn-in dawn-in-delay-2 mt-8 text-[#3F4A6B] text-lg leading-relaxed max-w-[54ch]">
+          {lede}
+        </p>
+      )
+    }
+  </div>
+</section>
