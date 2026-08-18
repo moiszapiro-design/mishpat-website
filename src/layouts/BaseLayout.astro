@@ -1,0 +1,127 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import DawnStrip from "../components/DawnStrip.astro";
+import { site, url } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Inner pages show a gradient rule below the header; the home hero doesn't. */
+  showStrip?: boolean;
+  includeOrgSchema?: boolean;
+}
+
+const {
+  title,
+  description = site.description,
+  showStrip = true,
+  includeOrgSchema = false,
+} = Astro.props;
+
+// Set PUBLIC_NOINDEX=true for preview builds that should stay out of search results.
+const noindex = import.meta.env.PUBLIC_NOINDEX === "true";
+const fullTitle = title ? `${title} — ${site.name}` : site.name;
+const canonical = new URL(Astro.url.pathname, site.url).toString();
+const ogImage = new URL("/og-image.png", site.url).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Arms the scroll-reveal styles. Without JS the content stays visible.
+      document.documentElement.classList.add("js");
+    </script>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {!noindex && <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/svg+xml" href={url("/favicon.svg")} />
+    <meta name="theme-color" content="#E7E6E6" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {
+      includeOrgSchema && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FinancialService",
+            name: site.name,
+            url: site.url,
+            description: site.description,
+            foundingDate: site.founded,
+            areaServed: ["Colombia", "Latin America", "Emerging Markets"],
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "investor relations",
+              email: site.contact.email,
+              telephone: site.contact.phone,
+            },
+          })}
+        />
+      )
+    }
+  </head>
+  <body class="bg-white text-[#1C2951] antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] bg-[#1C2951] text-white px-4 py-2"
+      >Skip to content</a
+    >
+    <Nav />
+    {
+      showStrip && (
+        <div class="pt-20">
+          <DawnStrip />
+        </div>
+      )
+    }
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Reveal each block once as it scrolls into view.
+      const items = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
+      const show = (el: HTMLElement) => el.classList.add("is-visible");
+
+      if (
+        !("IntersectionObserver" in window) ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        items.forEach(show);
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              show(entry.target as HTMLElement);
+              observer.unobserve(entry.target);
+            });
+          },
+          { rootMargin: "0px 0px -12% 0px", threshold: 0.12 },
+        );
+        items.forEach((el) => {
+          // Anything already on screen at load shows immediately — no flash.
+          if (el.getBoundingClientRect().top < window.innerHeight) show(el);
+          else observer.observe(el);
+        });
+      }
+    </script>
+  </body>
+</html>
