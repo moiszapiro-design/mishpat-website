@@ -1,0 +1,393 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Logo from "../components/Logo.astro";
+import { site } from "../data/site";
+
+const principles = [
+  {
+    name: "Specialized focus",
+    body: "We are not a generalist credit manager. Our sourcing is niche, legal- and local-execution-driven, in markets where scale is not the advantage.",
+  },
+  {
+    name: "Local execution",
+    body: "In-country relationships and hands-on transaction execution that traditional capital cannot replicate from a distance.",
+  },
+  {
+    name: "Flexible capital",
+    body: "Across legal assets, secured loans, asset purchases, distressed credit, and special situations — structure follows the opportunity.",
+  },
+  {
+    name: "Downside-first underwriting",
+    body: "Collateral, enforceability, documentation, counterparty quality, and multiple paths to recovery, assessed before any return case.",
+  },
+  {
+    name: "Institutional discipline",
+    body: "Third-party diligence, collateral controls, legal review, and ongoing reporting on every position.",
+  },
+];
+
+const strategies = [
+  {
+    name: "Legal Asset Finance",
+    body: "We provide flexible capital that unlocks liquidity from final, enforceable legal claims. Our focus is sovereign-linked obligations and other asset-backed structures where the payor is a creditworthy obligor and the legal outcome has already been determined — strategies designed to be self-liquidating, with strong loan-to-value ratios and low correlation to public markets.",
+  },
+  {
+    name: "Secured Credit",
+    body: "Structured private credit, underwritten downside-first. Every transaction is supported by collateral, contractual cash flows, receivables, real assets, or other identifiable repayment sources. We size for risk-adjusted returns across the cycle, with enforceable security, conservative loan-to-value, and multiple paths to recovery.",
+  },
+  {
+    name: "Distressed Assets",
+    body: "We acquire or finance assets where liquidity needs, regulatory pressure, or market dislocation create attractive entry points — often at meaningful discounts to intrinsic value, with clear catalysts for monetization.",
+  },
+  {
+    name: "Special Situations",
+    body: "Idiosyncratic opportunities that require speed, structuring creativity, local knowledge, and a clear path to recovery. We invest where complexity creates a barrier to entry — and where disciplined execution converts that barrier into the return.",
+  },
+];
+
+const cases = [
+  {
+    tag: "Secured Bridge Lending",
+    headline: "Multinational healthcare borrower",
+    body: "Short-duration secured bridge loan structured and funded within 30 days, collateralized by a letter of credit from a major bank. Fully repaid on schedule.",
+    meta: "8-figure facility · 3-month term",
+  },
+  {
+    tag: "Arbitration Finance",
+    headline: "Collateralized arbitration claim",
+    body: "Investment supported by real estate and a service-contract collateral package, with upside tied to arbitration outcome. Resolved within approximately 12 months.",
+    meta: "Single-name · ~12 months",
+  },
+  {
+    tag: "Distressed Asset Purchase",
+    headline: "Discounted loan portfolio",
+    body: "Acquired a distressed loan portfolio at a meaningful discount under a 30-day execution window, with a clear collection thesis. Fully monetized within six months.",
+    meta: "Portfolio acquisition · ~6 months",
+  },
+  {
+    tag: "Special Situation",
+    headline: "Senior secured PPP debt",
+    body: "Acquired senior secured, dollar-denominated debt tied to a Colombian airport public-private partnership at a substantial discount, with escrow-backed payment structure.",
+    meta: "Senior secured · escrow-backed",
+  },
+  {
+    tag: "Legal Asset Finance",
+    headline: "Diversified judgment portfolio",
+    body: "A diversified portfolio of final, enforceable legal claims acquired across multiple plaintiffs and government counterparties, sourced through a proprietary local origination network.",
+    meta: "Multi-vintage · sovereign-linked",
+  },
+  {
+    tag: "Infrastructure-Linked Credit",
+    headline: "Structured collateral package",
+    body: "Structured credit exposure to an infrastructure obligor, with collateral protections, third-party diligence, and ongoing covenant monitoring.",
+    meta: "Senior secured · covenanted",
+  },
+];
+
+// One shared type scale, so every section keeps the same hierarchy.
+const H2 =
+  "font-display text-[1.875rem] md:text-[2.25rem] leading-[1.12] tracking-[-0.015em]";
+const LEDE = "text-[17px] leading-relaxed";
+const BODY = "text-[15px] leading-relaxed";
+---
+
+<BaseLayout
+  title="Alternative credit for complex markets"
+  showStrip={false}
+  includeOrgSchema={true}
+>
+  <!-- ========================= HERO ========================= -->
+  <section
+    class="relative min-h-[100svh] bg-dawn flex items-center overflow-hidden"
+  >
+    <div
+      class="relative w-full max-w-[1180px] mx-auto px-6 lg:px-10 pt-32 pb-40 md:pt-36 md:pb-48"
+    >
+      <div class="grid md:grid-cols-12 gap-12 items-end">
+        <div class="md:col-span-7 text-white">
+          <div class="dawn-in">
+            <Logo class="w-16 h-16 md:w-[4.5rem] md:h-[4.5rem] mb-10" />
+          </div>
+          <p class="eyebrow eyebrow-light dawn-in dawn-in-delay-1">
+            Mishpat Capital Management
+          </p>
+          <h1
+            class="dawn-in dawn-in-delay-2 mt-7 font-display text-[2.25rem] sm:text-[2.75rem] lg:text-[3.5rem] leading-[1.06] tracking-[-0.03em]"
+          >
+            Alternative credit<br />for complex markets.
+          </h1>
+          <p
+            class={`dawn-in dawn-in-delay-3 mt-8 text-white/80 max-w-[48ch] ${LEDE}`}
+          >
+            A specialized alternative investment manager focused on legal
+            assets, secured credit, distressed assets, and special situations in
+            Colombia and select emerging markets.
+          </p>
+          <div class="dawn-in dawn-in-delay-4 mt-12 flex flex-wrap gap-3">
+            <a
+              href="#contact"
+              class="inline-flex items-center px-6 py-3.5 bg-white text-[#1C2951] text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[#E7E6E6] transition-colors"
+            >
+              Investor inquiries
+            </a>
+            <a
+              href="#strategies"
+              class="inline-flex items-center px-6 py-3.5 border border-white/40 text-white text-[11px] tracking-[0.2em] uppercase hover:bg-white/10 hover:border-white transition-colors"
+            >
+              Strategies
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="hidden md:block md:col-span-5 md:pl-6 dawn-in dawn-in-delay-4"
+        >
+          <div>
+            <p class="eyebrow eyebrow-light">New beginnings</p>
+            <p
+              class="mt-5 font-display text-white text-xl lg:text-[1.5rem] leading-snug"
+            >
+              Where dislocated markets, local talent, and patient capital
+              converge.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= ABOUT ========================= -->
+  <section id="about" class="bg-white">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-10 py-24 md:py-32">
+      <div class="reveal">
+        <p class="eyebrow">About</p>
+        <h2 class={`mt-6 text-[#1C2951] max-w-[18ch] ${H2}`}>
+          Intentionally focused.
+        </h2>
+        <p
+          class="mt-6 text-[#3F4A6B] text-[19px] md:text-[21px] leading-relaxed max-w-[48ch] font-display"
+        >
+          Built around the convergence of dislocated markets, local talent, and
+          patient capital.
+        </p>
+      </div>
+
+      <div
+        class={`reveal reveal-1 mt-14 grid md:grid-cols-2 gap-x-20 gap-y-7 text-[#3F4A6B] ${BODY}`}
+      >
+        <p>
+          Mishpat Capital Management is a specialized alternative investment
+          manager focused on complex credit and special situations in
+          undercapitalized emerging markets.
+        </p>
+        <p>
+          Founded in 2019, the firm pursues opportunities that require
+          specialized sourcing, local execution, and structured-credit
+          expertise. Our experience spans legal-asset finance, secured lending,
+          distressed assets, specialty finance, and infrastructure-linked credit
+          — sectors where traditional capital is constrained by complexity,
+          timing, or jurisdiction.
+        </p>
+        <p class="md:col-span-2 max-w-[74ch]">
+          We believe attractive risk-adjusted returns come from where the market
+          has not yet organized itself: where local relationships, legal
+          understanding, and disciplined underwriting still matter more than
+          scale. That is the ground we choose to stand on.
+        </p>
+      </div>
+
+      <div
+        class="reveal reveal-2 mt-16 border-t border-[#D7DAE4] pt-10 max-w-[64ch]"
+      >
+        <h3 class="font-display text-[1.375rem] md:text-[1.5rem] text-[#1C2951]">
+          Judgment. Discipline. Execution.
+        </h3>
+        <p class={`mt-4 text-[#3F4A6B] ${BODY}`}>
+          The name <span class="italic">Mishpat</span> comes from the Hebrew{" "}
+          <span class="italic">mishpâṭ</span>, meaning judgment, rectitude, and
+          right decisions according to law. That principle guides our approach
+          to investing: rigorous analysis, careful structuring, and disciplined
+          execution.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INVESTMENT PHILOSOPHY ================= -->
+  <section id="philosophy" class="bg-[#1C2951] text-white">
+    <div class="max-w-[1180px] mx-auto px-6 lg:px-10 py-24 md:py-32">
+      <div class="reveal">
+        <p class="eyebrow eyebrow-light">Investment Philosophy</p>
+        <h2 class={`mt-6 max-w-[22ch] ${H2}`}>
+          We underwrite the downside first.
+        </h2>
+        <p class={`mt-6 text-white/80 max-w-[60ch] ${LEDE}`}>
+          Capital is deployed only when the downside is protected. Every
+          position starts with collateral, enforceability, and a clear path to
+          recovery — the return case comes after.
+        </p>
+      </div>
+
+      <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-5 gap-9 lg:gap-8">
+        {
+          principles.map((p, i) => (
+            <div
+              class:list={[
+                "reveal border-t border-white/20 pt-6",
+                `reveal-${Math.min(i, 4)}`,
+              ]}
+            >
+              <h3 class="font-display text-[17px] leading-snug">{p.name}</h3>
+              <p class="mt-3 text-white/75 text-[14px] leading-relaxed">
+                {p.body}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= STRATEGIES ========================= -->
+  <section id="strategies" class="bg-white">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-10 py-24 md:py-32">
+      <div class="reveal">
+        <p class="eyebrow">Strategies</p>
+        <h2 class={`mt-6 text-[#1C2951] max-w-[20ch] ${H2}`}>
+          We invest where complexity creates opportunity.
+        </h2>
+        <p class={`mt-6 text-[#3F4A6B] max-w-[60ch] ${LEDE}`}>
+          Mishpat focuses on situations where capital scarcity, legal
+          complexity, collateral value, or timing constraints create
+          opportunities for specialized investors.
+        </p>
+      </div>
+
+      <div class="mt-16 grid md:grid-cols-2 gap-x-20 gap-y-12">
+        {
+          strategies.map((s, i) => (
+            <article
+              class:list={[
+                "reveal border-t border-[#D7DAE4] pt-7",
+                `reveal-${Math.min(i, 4)}`,
+              ]}
+            >
+              <h3 class="font-display text-[1.375rem] md:text-[1.5rem] text-[#1C2951]">
+                {s.name}
+              </h3>
+              <p class={`mt-4 text-[#3F4A6B] ${BODY}`}>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="reveal mt-20 border-t border-[#D7DAE4] pt-10">
+        <p class="eyebrow">Representative transactions</p>
+        <p class={`mt-5 text-[#3F4A6B] max-w-[64ch] ${BODY}`}>
+          Selected transactions — anonymized for confidentiality — showing how
+          we underwrite, structure, and execute across the credit cycle.
+        </p>
+      </div>
+
+      <div class="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-x-14 gap-y-12">
+        {
+          cases.map((c, i) => (
+            <article
+              class:list={[
+                "reveal border-t border-[#D7DAE4] pt-6 flex flex-col",
+                `reveal-${Math.min(i % 3, 4)}`,
+              ]}
+            >
+              <p class="text-[10px] tracking-[0.22em] uppercase text-[#2F5496] font-medium">
+                {c.tag}
+              </p>
+              <h4 class="mt-3 font-display text-[1.0625rem] text-[#1C2951] leading-snug">
+                {c.headline}
+              </h4>
+              <p class="mt-3 text-[#3F4A6B] text-[14px] leading-relaxed grow">
+                {c.body}
+              </p>
+              <p class="mt-5 text-[11px] text-[#2F5496] tracking-wide">
+                {c.meta}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+
+      <p
+        class="reveal mt-12 text-[11px] text-[#3F4A6B]/80 max-w-[64ch] leading-relaxed"
+      >
+        Representative examples; counterparties anonymized for confidentiality.
+        Past performance is not indicative of future results. Detailed
+        transaction information is available to qualified investors upon
+        request.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================= CONTACT ========================= -->
+  <section id="contact" class="bg-[#E7E6E6]">
+    <div class="max-w-[1100px] mx-auto px-6 lg:px-10 py-24 md:py-32">
+      <div class="reveal">
+        <p class="eyebrow">Contact</p>
+        <h2 class={`mt-6 text-[#1C2951] ${H2}`}>Investor inquiries.</h2>
+        <p class={`mt-6 text-[#3F4A6B] max-w-[54ch] ${LEDE}`}>
+          For more information about Mishpat Capital Management, please get in
+          touch directly.
+        </p>
+      </div>
+
+      <div
+        class="reveal reveal-1 mt-14 border-t border-[#1C2951]/15 pt-9 max-w-[34rem]"
+      >
+        <h3 class="font-display text-[1.5rem] text-[#1C2951]">
+          {site.contact.name}
+        </h3>
+        <p class="mt-2 text-[11px] tracking-[0.18em] uppercase text-[#2F5496]">
+          {site.contact.title}
+        </p>
+        <dl class="mt-7 space-y-3.5 text-[#1C2951] text-[15px]">
+          <div class="flex flex-wrap items-baseline gap-x-6">
+            <dt
+              class="w-16 text-[10px] tracking-[0.2em] uppercase text-[#2F5496]"
+            >
+              Email
+            </dt>
+            <dd>
+              <a
+                href={`mailto:${site.contact.email}`}
+                class="underline decoration-[#4472C4] decoration-1 underline-offset-4 hover:text-[#2F5496] transition-colors"
+                >{site.contact.email}</a
+              >
+            </dd>
+          </div>
+          <div class="flex flex-wrap items-baseline gap-x-6">
+            <dt
+              class="w-16 text-[10px] tracking-[0.2em] uppercase text-[#2F5496]"
+            >
+              Phone
+            </dt>
+            <dd>
+              <a
+                href={`tel:${site.contact.phone.replace(/[^+\d]/g, "")}`}
+                class="hover:text-[#2F5496] transition-colors"
+                >{site.contact.phone}</a
+              >
+            </dd>
+          </div>
+          <div class="flex flex-wrap items-baseline gap-x-6">
+            <dt
+              class="w-16 text-[10px] tracking-[0.2em] uppercase text-[#2F5496]"
+            >
+              Focus
+            </dt>
+            <dd class="text-[#3F4A6B]">
+              Colombia and select emerging markets
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
